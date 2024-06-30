@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 20px 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 530px;
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input[type="text"], textarea, button {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .consulting-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 20px 0;
+        }
+
+        .consulting-bubble {
+            background-color: #e0e0e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .consulting-bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-top-color: #e0e0e0;
+            border-bottom: 0;
+            border-left: 0;
+            margin-left: -5px;
+            margin-bottom: -10px;
+        }
+
+        .consulting-details {
+            margin-bottom: 10px;
+        }
+
+        .consulting-details span {
+            display: block;
+        }
+
+        .consulting-details form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .consulting-details textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            resize: vertical;
+        }
+
+        .consulting-details button {
+            display: block;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .consulting-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .consulting-form input[type="text"], .consulting-form button {
+            width: 100%;
+            max-width: 400px;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <h1>Welcome to the Doctor Page</h1>
+
+    {% if taked_Dl %}
+    <form action="{{ url_for('Doctor_display') }}" method="post" class="consulting-form">
+        <label for="username">Name</label>
+        <input type="text" name="username" placeholder="Enter your name">
+
+        <label for="D_ID">ID</label>
+        <input type="text" name="D_ID" placeholder="Enter your ID">
+        
+        <button type="submit">Submit</button>
+    </form>
+    <br><br>
+    {{ ms }}
+    {% endif %}
+    {% if taked_DConsulting %}
+    <h2>Consulting Data</h2>
+    {{ mse }}
+        {% for consulting in result %}
+        <div class="consulting-section">
+            <div class="consulting-bubble">
+                <div class="consulting-details">
+                    <span>Consulting Number: {{ consulting[0] }}</span>
+                    <span>Consulting: {{ consulting[1] }}</span>
+                    <span>Time: {{ consulting[4] }}</span>
+                </div>
+                <form action="doctor_Responce" method="post">
+                    <textarea name="M_Disctiption" placeholder="Enter your response..."></textarea>
+                    <input type="text" name="CP_ID" value="{{ consulting[2] }}" hidden>
+                    <input type="text" name="CD_ID" value="{{ consulting[3] }}" hidden>
+                    <input type="text" name="C_Code" value="{{ consulting[0] }}" hidden>
+                    <button type="submit">Respond</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    
+    {% endif %}
+</body>
+</html>

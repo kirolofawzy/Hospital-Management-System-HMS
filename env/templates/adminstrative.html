@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrative Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            background-color: #fdfffe;
+            padding: 20px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        .centered-top, .login-container, .signup-section {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgb(17, 107, 77);
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-in-out;
+            text-align: center;
+            font-family: cursive;
+        
+        }
+        
+        .centered-top h1, .centered-top h2, .login-form h2, .signup-section h3 {
+            text-align: center;
+            color: #fffdfd;
+        }
+        
+        h2, h3, h5 {
+            margin-top: 20px;
+            color: #000000;
+        }
+        
+        a {
+            display: block;
+            margin: 10px 0;
+            color: #007BFF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: #0056b3;
+        }
+        
+        hr {
+            margin: 20px 0;
+            border: none;
+            border-top: 1px solid #ddd;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #000000;
+            font-weight: bold;
+        }
+        
+        .input-group input, select {
+            width: 100%;
+            padding: 10px;
+            background-color: #5e9d42;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .input-group input:focus, select:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.25);
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #11251c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="centered-top">
+        <h1>Now in the Administrative Page</h1>
+        <h2>Please enter your data here</h2>
+        <hr>
+        <a href="home">Go to home page again</a>
+        {% if t %}
+            <a href="admin_display">Go to admin_display page</a>
+            <a href="adminstrative2">admin page</a>
+        {% endif %}
+        {% if truee %}
+            <a href="admin_display">Go to admin_display page</a>
+        {% endif %}
+
+        <br>
+        <hr>
+    </div>
+
+    <div class="login-container">
+        <form action="{{ url_for('adminstratives') }}" method="post" class="login-form">
+            <div class="input-group">
+                <label for="username">{{ un }}</label>
+                <input type="text" name="username" id="username" {{ hidden }} placeholder="Enter your name">
+            </div>
+            <div class="input-group">
+                <label for="password">{{ pw }}</label>
+                <input type="password" name="password" id="password" {{ hidden }} placeholder="Enter your password">
+            </div>
+            <button type="submit" {{ hidden }}>Submit</button>
+        </form>
+    </div>
+
+    <div class="signup-section">
+        <h3>{{ message }}</h3>
+
+        {% if truee %}
+            <!-- Sign up doctor form -->
+            <hr>
+            <h3>Sign up doctor</h3>
+            <form action="{{ url_for('sign') }}" method="post" class="signup-form">
+                <div class="input-group">
+                    <label for="D_Name">Name</label>
+                    <input type="text" name="D_Name" id="D_Name" required>
+                </div>
+                <div class="input-group">
+                    <label for="D_Number">Number</label>
+                    <input type="text" name="D_Number" id="D_Number" required>
+                </div>
+                <div class="input-group">
+                    <label for="D_Mail">Mail</label>
+                    <input type="text" name="D_Mail" id="D_Mail" required>
+                </div>
+                <div class="input-group">
+                    <label for="D_Address">Address</label>
+                    <input type="text" name="D_Address" id="D_Address" required>
+                </div>
+                <div class="input-group">
+                    <label for="D_Salary">Salary</label>
+                    <input type="text" name="D_Salary" id="D_Salary" required>
+                </div>
+                <div class="input-group">
+                    <label for="D_Shift">Shift</label>
+                    <input type="text" name="D_Shift" id="D_Shift" required>
+                </div>
+                <div class="input-group">
+                    <label for="D_Specialization">Specialization</label>
+                    <select name="D_Specialization" id="D_Specialization" required>
+                        <option value="1">Surgery</option>
+                        <option value="2">Internal medicine</option>
+                        <option value="3">Cardiology</option>
+                        <option value="4">Ophthalmology</option>
+                        <option value="5">Dental</option>
+                        <option value="6">Neurosurgery</option>
+                    </select>
+                </div>
+                <input type="hidden" name="pass_admin" value="{{ password }}">
+                <button type="submit">Sign up</button>
+            </form>
+    </div>
+    <div class="login-container">
+            <!-- Sign up patient form -->
+            <hr size="20px" style=" padding: 20px">
+            <h3>Sign up patient</h3>
+            <form action="{{ url_for('signP') }}" method="post" class="signup-form">
+                <div class="input-group">
+                    <label for="P_Name">Name</label>
+                    <input type="text" name="P_Name" id="P_Name" required>
+                </div>
+                <div class="input-group">
+                    <label for="P_Number">Number</label>
+                    <input type="text" name="P_Number" id="P_Number" required>
+                </div>
+                <div class="input-group">
+                    <label for="P_Mail">Mail</label>
+                    <input type="text" name="P_Mail" id="P_Mail" required>
+                </div>
+                <div class="input-group">
+                    <label for="P_Address">Address</label>
+                    <input type="text" name="P_Address" id="P_Address" required>
+                </div>
+                <div class="input-group">
+                    <label for="P_age">Age</label>
+                    <input type="text" name="P_age" id="P_age" required>
+                </div>
+                <div class="input-group">
+                    <h5>Gender</h5>
+                    <label for="P_Gender_Male">Male</label>
+                    <input type="radio" name="P_Gender" id="P_Gender_Male" value="Male" required>
+                    <label for="P_Gender_Female">Female</label>
+                    <input type="radio" name="P_Gender" id="P_Gender_Female" value="Female" required>
+                </div>
+                <input type="hidden" name="pass_admin" value="{{ password }}">
+                <button type="submit">Sign up</button>
+            </form>
+        {% endif %}
+        {{ mes }}
+    </div>
+</body>
+</html>

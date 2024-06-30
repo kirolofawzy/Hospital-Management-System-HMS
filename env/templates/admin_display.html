@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1, h2, h3 {
+            margin: 20px 0;
+        }
+
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background: #ddd;
+            margin: 40px 0;
+        }
+
+        .icon-link {
+            margin: 0 10px;
+            display: inline-block;
+        }
+
+        .icon-link img {
+            width: 110px;
+            height: 110px;
+            vertical-align: middle;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Display Page</h1>
+    <h3>Now you can view, modify, and delete patient and doctor data</h3>
+
+    <hr>
+    <div class="icon-links">
+        <a href="adminstrative2" class="icon-link"><img src="/env/static/administrator.png" alt="Admin Icon"></a>
+        <a href="home" class="icon-link"><img src="/env/static/home (1).png" alt="Home Icon"></a>
+    </div>
+    <hr>
+    <h2>Data of Doctors</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Number</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Salary</th>
+            <th>Shift</th>
+            <th>Specialization</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% for doctor in result %}
+        <tr>
+            <td>{{ doctor[0] }}</td>
+            <td>{{ doctor[1] }}</td>
+            <td>{{ doctor[2] }}</td>
+            <td>{{ doctor[3] }}</td>
+            <td>{{ doctor[4] }}</td>
+            <td>{{ doctor[5] }}</td>
+            <td>{{ doctor[6] }}</td>
+            <td>{{ doctor[7] }}</td>
+            <td><a href="admin_update/{{ doctor[0] }}">Update</a></td>
+            <td><a href="admin_delet/{{ doctor[0] }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {{ mse }}
+
+    <hr>
+
+    <h2>Data of Patients</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Number</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% for patient in result_p %}
+        <tr>
+            <td>{{ patient[0] }}</td>
+            <td>{{ patient[1] }}</td>
+            <td>{{ patient[2] }}</td>
+            <td>{{ patient[3] }}</td>
+            <td>{{ patient[4] }}</td>
+            <td>{{ patient[5] }}</td>
+            <td>{{ patient[6] }}</td>
+            <td><a href="admin_update/{{ patient[0] }}">Update</a></td>
+            <td><a href="admin_delet/{{ patient[0] }}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {{ ms }}
+</body>
+</html>
